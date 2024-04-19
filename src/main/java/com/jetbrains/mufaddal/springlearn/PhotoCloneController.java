@@ -2,6 +2,7 @@ package com.jetbrains.mufaddal.springlearn;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,8 +16,8 @@ import java.util.Map;
 @RestController
 public class PhotoCloneController {
 
-    private Map<String, Photo> db = new HashMap<>(){{
-        put("1",new Photo("1", "firstImage.jpg"));
+    private Map<String, Photo> db = new HashMap<>() {{
+        put("1", new Photo("1", "firstImage.jpg"));
     }};
 
     @GetMapping("/")
@@ -32,7 +33,13 @@ public class PhotoCloneController {
     @GetMapping("/photos/{id}")
     public Photo get(@PathVariable String id) {
         Photo photo = db.get(id);
-        if(photo == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        if (photo == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return photo;
+    }
+
+    @DeleteMapping("/photos/{id}")
+    public void delete(@PathVariable String id) {
+        Photo photo = db.remove(id);
+        if (photo == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 }
