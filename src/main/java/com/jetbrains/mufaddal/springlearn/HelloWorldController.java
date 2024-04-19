@@ -1,2 +1,13 @@
-package com.jetbrains.mufaddal.springlearn;public class HelloWorld {
+package com.jetbrains.mufaddal.springlearn;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloWorldController {
+
+    @GetMapping("/hello")
+    public String helloWorld() {
+        return "Hello World";
+    }
 }
