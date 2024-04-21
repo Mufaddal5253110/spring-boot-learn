@@ -1,8 +1,7 @@
 package com.jetbrains.mufaddal.springlearn;
 
-import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -13,9 +12,9 @@ import java.util.*;
 @RestController
 public class PhotoCloneController {
 
-    private Map<String, Photo> db = new HashMap<>() {{
-        put("1", new Photo("1", "firstImage.jpg"));
-    }};
+    @Autowired
+    private PhotoService photoService;
+
 
     @GetMapping("/")
     public String helloWorld() {
@@ -24,29 +23,25 @@ public class PhotoCloneController {
 
     @GetMapping("/photos")
     public Collection<Photo> get() {
-        return db.values();
+        return photoService.get();
     }
 
     @GetMapping("/photos/{id}")
     public Photo get(@PathVariable String id) {
-        Photo photo = db.get(id);
+        Photo photo = photoService.get(id);
         if (photo == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return photo;
     }
 
     @DeleteMapping("/photos/{id}")
     public void delete(@PathVariable String id) {
-        Photo photo = db.remove(id);
+        Photo photo = photoService.delete(id);
         if (photo == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/photo")
     public Photo create(@RequestPart("data") MultipartFile file) throws IOException {
-        Photo photo = new Photo();
-        photo.setId(UUID.randomUUID().toString());
-        photo.setFileName(file.getOriginalFilename());
-        photo.setData(file.getBytes());
-        db.put(photo.getId(),photo);
+        Photo photo = photoService.save(file.getOriginalFilename(),file.getContentType(), file.getBytes());
         return photo;
     }
 }

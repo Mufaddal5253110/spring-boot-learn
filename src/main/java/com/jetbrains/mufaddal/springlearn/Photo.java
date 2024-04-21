@@ -10,8 +10,11 @@ public class Photo {
     private String fileName;
     @JsonIgnore
     private byte[] data;
+    private String contentType;
 
 
+    public Photo() {
+    }
     public byte[] getData() {
         return data;
     }
@@ -20,8 +23,12 @@ public class Photo {
         this.data = data;
     }
 
-    public Photo() {
+    public String getContentType() {
+        return contentType;
+    }
 
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
     }
 
     public Photo(String id, String fileName) {
