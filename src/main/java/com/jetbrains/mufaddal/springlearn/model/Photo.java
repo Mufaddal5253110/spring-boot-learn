@@ -1,16 +1,22 @@
 package com.jetbrains.mufaddal.springlearn.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import jakarta.validation.constraints.NotEmpty;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
+@Table("PHOTO")
 public class Photo {
 
-    private String id;
+    @Id
+    private Integer id;
     @NotEmpty
     private String fileName;
+    private String contentType;
     @JsonIgnore
     private byte[] data;
-    private String contentType;
+
 
 
     public Photo() {
@@ -31,16 +37,11 @@ public class Photo {
         this.contentType = contentType;
     }
 
-    public Photo(String id, String fileName) {
-        this.id = id;
-        this.fileName = fileName;
-    }
-
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

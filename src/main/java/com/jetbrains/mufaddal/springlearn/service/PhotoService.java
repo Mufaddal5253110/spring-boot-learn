@@ -1,6 +1,7 @@
 package com.jetbrains.mufaddal.springlearn.service;
 
 import com.jetbrains.mufaddal.springlearn.model.Photo;
+import com.jetbrains.mufaddal.springlearn.repository.PhotoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -10,30 +11,31 @@ import java.util.UUID;
 
 @Service
 public class PhotoService {
-    private Map<String, Photo> db = new HashMap<>() {{
-        put("1", new Photo("1", "firstImage.jpg"));
-    }};
+    private final PhotoRepository photoRepository;
 
-    public Collection<Photo> get(){
-        return db.values();
+    public PhotoService(PhotoRepository photoRepository) {
+        this.photoRepository = photoRepository;
     }
 
-    public Photo get(String id) {
-        return db.get(id);
+    public Iterable<Photo> get(){
+        return photoRepository.findAll();
+    }
+
+    public Photo get(Integer id) {
+        return photoRepository.findById(id).orElse(null);
     }
 
     public Photo save(String fileName,String contentType, byte[] data) {
         Photo photo = new Photo();
-        photo.setId(UUID.randomUUID().toString());
         photo.setFileName(fileName);
         photo.setContentType(contentType);
         photo.setData(data);
-        db.put(photo.getId(),photo);
+        photoRepository.save(photo);
         return photo;
     }
 
-    public Photo delete(String id) {
-        return db.remove(id);
+    public void delete(Integer id) {
+        photoRepository.deleteById(id);
     }
 
 
