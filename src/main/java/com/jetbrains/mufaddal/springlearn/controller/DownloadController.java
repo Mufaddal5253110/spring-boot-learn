@@ -1,5 +1,7 @@
-package com.jetbrains.mufaddal.springlearn;
+package com.jetbrains.mufaddal.springlearn.controller;
 
+import com.jetbrains.mufaddal.springlearn.service.PhotoService;
+import com.jetbrains.mufaddal.springlearn.model.Photo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.GetMapping;

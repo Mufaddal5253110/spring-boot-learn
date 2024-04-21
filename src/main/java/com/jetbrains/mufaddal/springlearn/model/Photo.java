@@ -1,4 +1,4 @@
-package com.jetbrains.mufaddal.springlearn;
+package com.jetbrains.mufaddal.springlearn.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotEmpty;

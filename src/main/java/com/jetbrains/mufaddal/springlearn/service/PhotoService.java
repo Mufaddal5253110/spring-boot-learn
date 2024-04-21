@@ -1,5 +1,6 @@
-package com.jetbrains.mufaddal.springlearn;
+package com.jetbrains.mufaddal.springlearn.service;
 
+import com.jetbrains.mufaddal.springlearn.model.Photo;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
