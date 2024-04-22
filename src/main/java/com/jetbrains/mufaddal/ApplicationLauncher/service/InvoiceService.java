@@ -2,6 +2,7 @@ package com.jetbrains.mufaddal.ApplicationLauncher.service;
 
 import com.jetbrains.mufaddal.ApplicationLauncher.model.Invoice;
 import com.jetbrains.mufaddal.ApplicationLauncher.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,11 +12,14 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class InvoiceService {
 
     List<Invoice> invoices = new CopyOnWriteArrayList<>();
-    private final UserService userService;
+//    private final UserService userService;
+//
+//    public InvoiceService(UserService userService) {
+//        this.userService = userService;
+//    }
 
-    public InvoiceService(UserService userService) {
-        this.userService = userService;
-    }
+    @Autowired
+    private UserService userService;
 
     public List<Invoice> findAll() {
         return invoices;
