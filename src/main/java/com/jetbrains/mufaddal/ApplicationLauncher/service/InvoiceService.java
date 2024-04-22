@@ -2,10 +2,12 @@ package com.jetbrains.mufaddal.ApplicationLauncher.service;
 
 import com.jetbrains.mufaddal.ApplicationLauncher.model.Invoice;
 import com.jetbrains.mufaddal.ApplicationLauncher.model.User;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+@Component
 public class InvoiceService {
 
     List<Invoice> invoices = new CopyOnWriteArrayList<>();

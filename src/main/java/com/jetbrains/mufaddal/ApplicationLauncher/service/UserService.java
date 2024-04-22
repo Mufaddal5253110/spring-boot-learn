@@ -1,10 +1,12 @@
 package com.jetbrains.mufaddal.ApplicationLauncher.service;
 
 import com.jetbrains.mufaddal.ApplicationLauncher.model.User;
+import org.springframework.stereotype.Component;
 
 
 import java.util.UUID;
 
+@Component
 public class UserService {
 
     public User findById(String id) {
