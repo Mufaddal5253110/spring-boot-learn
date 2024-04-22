@@ -3,6 +3,7 @@ package com.jetbrains.mufaddal.ApplicationLauncher.service;
 import com.jetbrains.mufaddal.ApplicationLauncher.model.Invoice;
 import com.jetbrains.mufaddal.ApplicationLauncher.model.User;
 import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +25,12 @@ public class InvoiceService {
     public void init() {
         System.out.println("Fetching PDF Template from S3...");
         // TODO download from s3 and save locally
+    }
+
+    @PreDestroy
+    public void shutdown() {
+        System.out.println("Deleting downloaded templates...");
+        // TODO actual deletion of PDFs
     }
 
     public List<Invoice> findAll() {
