@@ -5,6 +5,7 @@ import com.jetbrains.mufaddal.ApplicationLauncher.model.User;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,10 +16,12 @@ public class InvoiceService {
 
     List<Invoice> invoices = new CopyOnWriteArrayList<>();
     private final UserService userService;
+    private final String cdnUrl;
 
     @Autowired  //optional here
-    public InvoiceService(UserService userService) {
+    public InvoiceService(UserService userService, @Value("${cdn.url}") String cdnUrl) {
         this.userService = userService;
+        this.cdnUrl = cdnUrl;
     }
 
     @PostConstruct
@@ -43,9 +46,9 @@ public class InvoiceService {
             throw new IllegalStateException();
         }
         // TODO real pdf creation and storing it on network server
-        Invoice invoice = new Invoice(userId, amount, "http://www.africau.edu/images/default/sample.pdf");
+        Invoice invoice = new Invoice(userId, amount, cdnUrl + "/images/default/sample.pdf");
         invoices.add(invoice);
-        return new Invoice(userId, amount, "http://www.africau.edu/images/default/sample.pdf");
+        return invoice;
     }
 
 

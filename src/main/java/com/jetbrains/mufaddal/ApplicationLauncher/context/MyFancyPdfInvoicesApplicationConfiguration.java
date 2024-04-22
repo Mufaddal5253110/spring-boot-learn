@@ -7,9 +7,11 @@ import com.jetbrains.mufaddal.ApplicationLauncher.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 @ComponentScan(basePackageClasses = ApplicationLauncher.class)
 @Configuration
+@PropertySource("classpath:/application.properties")
 public class MyFancyPdfInvoicesApplicationConfiguration {
 
     @Bean
