@@ -2,6 +2,7 @@ package com.jetbrains.mufaddal.ApplicationLauncher.service;
 
 import com.jetbrains.mufaddal.ApplicationLauncher.model.Invoice;
 import com.jetbrains.mufaddal.ApplicationLauncher.model.User;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +20,11 @@ public class InvoiceService {
         this.userService = userService;
     }
 
+    @PostConstruct
+    public void init() {
+        System.out.println("Fetching PDF Template from S3...");
+        // TODO download from s3 and save locally
+    }
 
     public List<Invoice> findAll() {
         return invoices;
