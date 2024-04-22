@@ -1,19 +1,34 @@
 package com.jetbrains.mufaddal.ApplicationLauncher.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jetbrains.mufaddal.ApplicationLauncher.context.MyFancyPdfInvoicesApplicationConfiguration;
 import com.jetbrains.mufaddal.ApplicationLauncher.model.Invoice;
 import com.jetbrains.mufaddal.ApplicationLauncher.service.InvoiceService;
+import com.jetbrains.mufaddal.ApplicationLauncher.service.UserService;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.util.List;
 
 public class MyFancyPdfInvoicesServlet extends HttpServlet {
 
-    private InvoiceService invoiceService = new InvoiceService();
-    private ObjectMapper objectMapper = new ObjectMapper();
+//    private UserService userService;
+    private ObjectMapper objectMapper;
+    private InvoiceService invoiceService;
+    private UserService userService;
+
+    @Override
+    public void init() throws ServletException {
+        AnnotationConfigApplicationContext ctx
+                = new AnnotationConfigApplicationContext(MyFancyPdfInvoicesApplicationConfiguration.class);
+        this.userService = ctx.getBean(UserService.class);
+        this.objectMapper = ctx.getBean(ObjectMapper.class);
+        this.invoiceService = ctx.getBean(InvoiceService.class);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -45,8 +60,8 @@ public class MyFancyPdfInvoicesServlet extends HttpServlet {
                             "</html>");
         } else if (request.getRequestURI().equalsIgnoreCase("/invoices")) {
             response.setContentType("application/json; charset=UTF-8");
-            List<Invoice> invoices = invoiceService.findAll();  //
-            response.getWriter().print(objectMapper.writeValueAsString(invoices));  //
+            List<Invoice> invoices = invoiceService.findAll();
+            response.getWriter().print(objectMapper.writeValueAsString(invoices));
         }
     }
 }
