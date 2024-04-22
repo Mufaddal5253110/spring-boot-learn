@@ -1,13 +1,13 @@
-package com.jetbrains.mufaddal.springlearn;
+package com.jetbrains.mufaddal.myfancypdfinvoices;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringLearnApplication {
+public class MyFancyPdfInvoices {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringLearnApplication.class, args);
+		SpringApplication.run(MyFancyPdfInvoices.class, args);
 	}
 
 }
