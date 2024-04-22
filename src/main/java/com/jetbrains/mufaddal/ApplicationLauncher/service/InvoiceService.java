@@ -12,13 +12,13 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class InvoiceService {
 
     List<Invoice> invoices = new CopyOnWriteArrayList<>();
-//    private final UserService userService;
-//
-//    public InvoiceService(UserService userService) {
-//        this.userService = userService;
-//    }
+    private final UserService userService;
 
-    private UserService userService;
+    @Autowired  //optional here
+    public InvoiceService(UserService userService) {
+        this.userService = userService;
+    }
+
 
     public List<Invoice> findAll() {
         return invoices;
@@ -35,9 +35,5 @@ public class InvoiceService {
         return new Invoice(userId, amount, "http://www.africau.edu/images/default/sample.pdf");
     }
 
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
 
 }
