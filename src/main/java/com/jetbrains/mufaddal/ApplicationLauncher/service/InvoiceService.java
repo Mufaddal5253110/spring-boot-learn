@@ -18,7 +18,6 @@ public class InvoiceService {
 //        this.userService = userService;
 //    }
 
-    @Autowired
     private UserService userService;
 
     public List<Invoice> findAll() {
@@ -34,6 +33,11 @@ public class InvoiceService {
         Invoice invoice = new Invoice(userId, amount, "http://www.africau.edu/images/default/sample.pdf");
         invoices.add(invoice);
         return new Invoice(userId, amount, "http://www.africau.edu/images/default/sample.pdf");
+    }
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
 }
