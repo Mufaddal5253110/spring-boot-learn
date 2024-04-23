@@ -13,7 +13,6 @@ package com.jetbrains.mufaddal.ApplicationLauncher;
 //}
 
 import com.jetbrains.mufaddal.ApplicationLauncher.context.MyFancyPdfInvoicesApplicationConfiguration;
-import com.jetbrains.mufaddal.ApplicationLauncher.web.MyFancyPdfInvoicesServlet;
 import jakarta.servlet.ServletContext;
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
