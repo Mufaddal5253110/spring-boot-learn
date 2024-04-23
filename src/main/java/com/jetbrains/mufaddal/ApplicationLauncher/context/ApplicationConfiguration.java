@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @PropertySource(value = "classpath:/application-${spring.profiles.active}.properties"
         , ignoreResourceNotFound = true)
 @EnableWebMvc
-public class MyFancyPdfInvoicesApplicationConfiguration {
+public class ApplicationConfiguration {
 
     @Bean // for request param validation
     public MethodValidationPostProcessor methodValidationPostProcessor() {

@@ -1,9 +1,7 @@
 package com.jetbrains.mufaddal.ApplicationLauncher.web;
 
-import com.jetbrains.mufaddal.ApplicationLauncher.dto.InvoiceDto;
 import com.jetbrains.mufaddal.ApplicationLauncher.model.Invoice;
 import com.jetbrains.mufaddal.ApplicationLauncher.service.InvoiceService;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -14,11 +12,11 @@ import java.util.List;
 
 @RestController
 @Validated
-public class MyFancyPdfInvoicesController {
+public class InvoicesController {
 
     private final InvoiceService invoiceService;
 
-    public MyFancyPdfInvoicesController(InvoiceService invoiceService) {
+    public InvoicesController(InvoiceService invoiceService) {
         this.invoiceService = invoiceService;
     }
 

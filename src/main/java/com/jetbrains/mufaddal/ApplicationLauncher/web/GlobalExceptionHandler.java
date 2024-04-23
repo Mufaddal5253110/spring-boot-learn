@@ -10,7 +10,7 @@ import jakarta.validation.ConstraintViolationException;
 
 
 @RestControllerAdvice
-public class GlobalControllerExceptionHandler {
+public class GlobalExceptionHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)

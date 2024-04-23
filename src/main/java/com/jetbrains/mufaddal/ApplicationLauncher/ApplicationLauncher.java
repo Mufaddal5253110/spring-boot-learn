@@ -12,7 +12,7 @@ package com.jetbrains.mufaddal.ApplicationLauncher;
 //
 //}
 
-import com.jetbrains.mufaddal.ApplicationLauncher.context.MyFancyPdfInvoicesApplicationConfiguration;
+import com.jetbrains.mufaddal.ApplicationLauncher.context.ApplicationConfiguration;
 import jakarta.servlet.ServletContext;
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
@@ -42,7 +42,7 @@ public class ApplicationLauncher {
 
     public static WebApplicationContext createApplicationContext(ServletContext servletContext) {
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-        ctx.register(MyFancyPdfInvoicesApplicationConfiguration.class);
+        ctx.register(ApplicationConfiguration.class);
         ctx.setServletContext(servletContext);
         ctx.refresh();
         ctx.registerShutdownHook();
