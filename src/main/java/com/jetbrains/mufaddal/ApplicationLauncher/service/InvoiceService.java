@@ -26,13 +26,13 @@ public class InvoiceService {
 
     @PostConstruct
     public void init() {
-        System.out.println("Fetching PDF Template from S3...");
+        System.out.println("Calling Post Constructor Function...");
         // TODO download from s3 and save locally
     }
 
     @PreDestroy
     public void shutdown() {
-        System.out.println("Deleting downloaded templates...");
+        System.out.println("Calling Pre Destroy Function...");
         // TODO actual deletion of PDFs
     }
 
