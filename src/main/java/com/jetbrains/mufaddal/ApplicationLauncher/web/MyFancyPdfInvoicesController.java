@@ -2,10 +2,7 @@ package com.jetbrains.mufaddal.ApplicationLauncher.web;
 
 import com.jetbrains.mufaddal.ApplicationLauncher.model.Invoice;
 import com.jetbrains.mufaddal.ApplicationLauncher.service.InvoiceService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,8 +21,8 @@ public class MyFancyPdfInvoicesController {
         return invoiceService.findAll();
     }
 
-    @PostMapping("/invoices")
-    public Invoice createInvoice(@RequestParam("user_id") String userId, @RequestParam Integer amount) {
+    @PostMapping("/invoices/{userId}/{amount}")
+    public Invoice createInvoice(@PathVariable String userId, @PathVariable Integer amount) {
         return invoiceService.create(userId, amount);
     }
 }
