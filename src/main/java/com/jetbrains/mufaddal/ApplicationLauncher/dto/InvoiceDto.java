@@ -1,12 +1,18 @@
 package com.jetbrains.mufaddal.ApplicationLauncher.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 //data transfer object
 public class InvoiceDto {
 
     @JsonProperty("user_id")
+    @NotBlank
     private String userId;
 
+    @Min(0)
+    @Max(100)
     private Integer amount;
 
     public String getUserId() {
