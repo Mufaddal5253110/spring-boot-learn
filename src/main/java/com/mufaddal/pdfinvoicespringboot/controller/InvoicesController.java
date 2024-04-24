@@ -22,7 +22,7 @@ public class InvoicesController {
 
     @GetMapping("/invoices")
     // @RequestMapping(value = "/invoices", method = RequestMethod.GET)
-    public List<Invoice> invoices() {
+    public Iterable<Invoice> invoices() {
         return invoiceService.findAll();
     }
 
