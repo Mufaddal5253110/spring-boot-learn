@@ -10,6 +10,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -43,7 +45,9 @@ public class InvoiceService {
         // TODO actual deletion of PDFs
     }
 
+    @Transactional
     public List<Invoice> findAll() {
+        System.out.println("Is a database transaction open? = " + TransactionSynchronizationManager.isActualTransactionActive());
         return jdbcTemplate.query("select id, user_id, pdf_url, amount from invoices", (resultSet, rowNum) -> {
             Invoice invoice = new Invoice();
             invoice.setId(resultSet.getObject("id").toString());
@@ -54,8 +58,9 @@ public class InvoiceService {
         });
     }
 
+    @Transactional
     public Invoice create(String userId, Integer amount) {
-
+        System.out.println("Is a database transaction open? = " + TransactionSynchronizationManager.isActualTransactionActive());
         String generatedPdfUrl = cdnUrl + "/images/default/sample.pdf";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();

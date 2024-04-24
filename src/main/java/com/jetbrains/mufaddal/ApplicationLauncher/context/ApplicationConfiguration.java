@@ -7,6 +7,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.TransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.thymeleaf.spring6.SpringTemplateEngine;
@@ -22,6 +25,7 @@ import javax.sql.DataSource;
 @PropertySource(value = "classpath:/application-${spring.profiles.active}.properties"
         , ignoreResourceNotFound = true)
 @EnableWebMvc
+@EnableTransactionManagement
 public class ApplicationConfiguration {
 
     @Bean // for request param validation
@@ -39,12 +43,21 @@ public class ApplicationConfiguration {
     }
 
     /*
-    * JDBCTemplate in combination with your DataSource. It is a tiny wrapper class around Java’s plain JDBC facilities and allows you to conveniently execute SQL statements
-    * */
+     * JDBCTemplate in combination with your DataSource. It is a tiny wrapper class around Java’s plain JDBC facilities and allows you to conveniently execute SQL statements
+     * */
     @Bean
     public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(dataSource());
     }
+
+    /*
+     * The TransactionManager bean is responsible for actually opening up and committing transactions on database connections.
+     * */
+    @Bean
+    public TransactionManager platformTransactionManager() {
+        return new DataSourceTransactionManager(dataSource());
+    }
+
     @Bean
     public ObjectMapper objectMapper() {
         return new ObjectMapper();
