@@ -19,8 +19,8 @@ public class DummyInvoiceServiceLoader {
     @PostConstruct
     public void setup() {
         System.out.println("Creating dev invoices...");
-        invoiceService.create("someUserId", 50);
-        invoiceService.create("someOtherUserId", 100);
+//        invoiceService.create("someUserId", 50);
+//        invoiceService.create("someOtherUserId", 100);
     }
 }
 

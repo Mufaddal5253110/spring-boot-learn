@@ -1,7 +1,9 @@
 package com.jetbrains.mufaddal.ApplicationLauncher.web;
 
+import com.jetbrains.mufaddal.ApplicationLauncher.dto.InvoiceDto;
 import com.jetbrains.mufaddal.ApplicationLauncher.model.Invoice;
 import com.jetbrains.mufaddal.ApplicationLauncher.service.InvoiceService;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -26,13 +28,13 @@ public class InvoicesController {
         return invoiceService.findAll();
     }
 
-//    @PostMapping("/invoices")
-//    public Invoice createInvoice(@RequestBody @Valid InvoiceDto invoiceDto) {
-//        return invoiceService.create(invoiceDto.getUserId(), invoiceDto.getAmount());
-//    }
-
     @PostMapping("/invoices")
-    public Invoice createInvoice(@RequestParam("user_id") @NotEmpty String userId, @RequestParam @Min(0) @Max(100) Integer amount) {
-        return invoiceService.create(userId, amount);
+    public Invoice createInvoice(@RequestBody @Valid InvoiceDto invoiceDto) {
+        return invoiceService.create(invoiceDto.getUserId(), invoiceDto.getAmount());
     }
+
+//    @PostMapping("/invoices")
+//    public Invoice createInvoice(@RequestParam("user_id") @NotEmpty String userId, @RequestParam @Min(0) @Max(100) Integer amount) {
+//        return invoiceService.create(userId, amount);
+//    }
 }
