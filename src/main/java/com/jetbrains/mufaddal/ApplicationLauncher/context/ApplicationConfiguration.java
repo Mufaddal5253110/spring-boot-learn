@@ -2,6 +2,7 @@ package com.jetbrains.mufaddal.ApplicationLauncher.context;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jetbrains.mufaddal.ApplicationLauncher.ApplicationLauncher;
+import org.h2.jdbcx.JdbcDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring6.view.ThymeleafViewResolver;
+
+import javax.sql.DataSource;
 
 @ComponentScan(basePackageClasses = ApplicationLauncher.class)
 @Configuration
@@ -23,6 +26,15 @@ public class ApplicationConfiguration {
     @Bean // for request param validation
     public MethodValidationPostProcessor methodValidationPostProcessor() {
         return new MethodValidationPostProcessor();
+    }
+
+    @Bean
+    public DataSource dataSource() {
+        JdbcDataSource ds = new JdbcDataSource();
+        ds.setURL("jdbc:h2:~/myFirstH2Database");
+        ds.setUser("sa");
+        ds.setPassword("sa");
+        return ds;
     }
 
     @Bean
