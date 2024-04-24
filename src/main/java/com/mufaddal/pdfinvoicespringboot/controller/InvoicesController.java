@@ -3,10 +3,7 @@ package com.mufaddal.pdfinvoicespringboot.controller;
 import com.mufaddal.pdfinvoicespringboot.dto.InvoiceDto;
 import com.mufaddal.pdfinvoicespringboot.model.Invoice;
 import com.mufaddal.pdfinvoicespringboot.service.InvoiceService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 import java.util.List;
@@ -29,5 +26,10 @@ public class InvoicesController {
     @PostMapping("/invoices")
     public Invoice createInvoice(@Valid @RequestBody InvoiceDto invoiceDto) {
         return invoiceService.create(invoiceDto.getUserId(), invoiceDto.getAmount());
+    }
+
+    @GetMapping("/invoices/user/{userId}")
+    public Iterable<Invoice> invoices(@PathVariable String userId) {
+        return invoiceService.findByUserId(userId);
     }
 }

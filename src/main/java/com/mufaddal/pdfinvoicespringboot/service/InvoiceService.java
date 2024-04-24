@@ -57,4 +57,9 @@ public class InvoiceService {
         invoice.setUserId(userId);
         return invoiceRepository.save(invoice);
     }
+
+    @Transactional
+    public Iterable<Invoice> findByUserId(String userId){
+        return invoiceRepository.findByUserId(userId);
+    }
 }
