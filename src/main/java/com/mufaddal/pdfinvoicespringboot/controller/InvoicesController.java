@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/invoices")
 public class InvoicesController {
 
     private final InvoiceService invoiceService;
@@ -17,18 +18,18 @@ public class InvoicesController {
         this.invoiceService = invoiceService;
     }
 
-    @GetMapping("/invoices")
+    @GetMapping()
     // @RequestMapping(value = "/invoices", method = RequestMethod.GET)
     public Iterable<Invoice> invoices() {
         return invoiceService.findAll();
     }
 
-    @PostMapping("/invoices")
+    @PostMapping()
     public Invoice createInvoice(@Valid @RequestBody InvoiceDto invoiceDto) {
         return invoiceService.create(invoiceDto.getUserId(), invoiceDto.getAmount());
     }
 
-    @GetMapping("/invoices/user/{userId}")
+    @GetMapping("/user/{userId}")
     public Iterable<Invoice> invoices(@PathVariable String userId) {
         return invoiceService.findByUserId(userId);
     }
